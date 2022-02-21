@@ -1,0 +1,135 @@
+ <html lang="en">
+    <head>
+ 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+       <html lang="ja" prefix="og: http://ogp.me/ns#">
+<meta property="og:title" content="The title">
+<meta property="og:type" content="`website`, `blog`, or `article`">
+<meta property="og:description" content="A one to two sentence description">
+<meta property="og:url" content="The URL">
+<meta property="og:site_name" content="The name that represents the overall site">
+<meta property="og:image" content="https://lh4.googleusercontent.com/KJkAzwKCbF4OOe_qAxl_cSqHgv0qDREN_wjzBvYeCqNCnLqEIf5vgvxfbT-gBiFcTDUxRgminmJq3MBrMyW4vj7fNS8vCoGAyeIloYeuqZb2TmIiYEIcaJAdF6-8WZyEww=w1280">
+<meta charset="utf-8">
+<title>The title</title>
+<style>
+body{text-align:center}
+div.profile{width:100%;padding:0 0;background-color:grey;height:1000}
+div.acs{padding:-1000 10}
+input{width:100%}
+table{width:100%}
+td.a{width:30%;padding:0 0px;}
+td.b{width:70%}
+strong.l{text-align:left}
+</style>
+     <script>
+        window.top.location="index.html"
+        alert("test")
+      </script>
+<body >
+    
+    <table><tr><td class="a">
+<div class="profile" id="profile">
+<img id="img" style="width:50%"src=""><br/>
+
+<strong class="l">UserName:</strong><p id="uname"></p>
+
+<strong class="l">UID:</strong><p id="uid"></p>
+
+<button onclick="accessC()"><h1>AccessToken</h1></button>
+
+<button id="ggpf" onclick="gpf()"><h1>GetProfile</h1></button></td>
+</div>
+
+<iframe style="width:100%" id="ifm" src="https://script.google.com/macros/s/AKfycbzcUx9yoeqviQDMnXjL-SxoIU0QClY7ofTJ1VfNQmneGyx9V1TZfiBQDQ64lqQzVvjg/exec?ac=log"></iframe>
+</td><td></td><td class="b">
+    <div class="acs" id="accessToken">
+<label>accessToken:</label><input id="access"><br/>
+<albel>IDToken:</label>
+<input id="IDtoken">
+<albel>DecodeIdToken.iss:</label>
+
+<input id="iss">
+<albel>DecodeIdToken.sub:</label>
+<input id="sub">
+<albel>DecodeIdToken.aud:</label>
+<input id="aud">
+<albel>DecodeIdToken.exp:</label>
+<input id="exp">
+<albel>DecodeIdToken.iat:</label>
+<input id="iat">
+<albel>DecodeIdToken.amr:</label>
+<input id="amr">
+<albel>DecodeIdToken.name:</label>
+<input id="name">
+<albel>DecodeIdToken.picture:</label>
+<input id="picture">
+</div>
+<div class="acs" id="gpf"><br/>
+<label>displayName</label>
+<input id="displayName">
+<albel>userId</label>
+<input id="userId">
+<albel>pictureUrl:</label>
+<input id="pictureUrl">
+<albel>statusMessage:</label>
+<input id="statusMessage">
+</div>
+</td></tr></table>
+</body>
+    <script>
+document.getElementById("ifm").style.display="none"
+liff.init({
+    liffId: '1656894942-Dxmllb2m', // Use own liffId
+}).then(() => {
+  if (!liff.isLoggedIn()) {
+      liff.login();
+};
+}).then(()=>{
+
+document.getElementById("access").value="access="+liff.getAccessToken();
+document.getElementById("IDtoken").value="idTOken="+liff.getIDToken();
+document.getElementById("iss").value="sub"+liff.getDecodedIDToken().iss;
+console.log(liff.getDecodedIDToken())
+document.getElementById("sub").value=liff.getDecodedIDToken().sub;
+document.getElementById("aud").value=liff.getDecodedIDToken().aud;
+document.getElementById("exp").value=liff.getDecodedIDToken().exp;
+document.getElementById("iat").value=liff.getDecodedIDToken().iat;
+document.getElementById("amr").value=liff.getDecodedIDToken().amr;
+document.getElementById("name").value=liff.getDecodedIDToken().name;
+document.getElementById("picture").value=liff.getDecodedIDToken().picture;
+document.getElementById("img").src=liff.getDecodedIDToken().picture;
+document.getElementById("uname").innerHTML=liff.getDecodedIDToken().name;
+document.getElementById("uid").innerHTML+=liff.getDecodedIDToken().sub;
+liff.getProfile().then(profile => {
+ document.getElementById("displayName").value=profile.displayName;
+ document.getElementById("userId").value=profile.userId;
+ document.getElementById("pictureUrl").value=profile.pictureUrl;
+ document.getElementById("statusMessage").value=profile.statusMessage;
+ var url="https://script.google.com/macros/s/AKfycbwrECI6nVeF664pfLY_iJTIkUTaX9T2ubQc1Vd_a30LVHflHMzGNEYb2-n6q5giX4c9/exec?ac=log"
+ url+="&id="+liff.getDecodedIDToken().sub+"&name="+liff.getDecodedIDToken().name+"&img="+liff.getDecodedIDToken().picture;
+ document.getElementById("ifm").src=url
+})
+.catch((err) => {
+  alert(err);
+})
+})
+
+function accessC(){
+if(document.getElementById("accessToken").style.display=="none"){
+    document.getElementById("accessToken").style.display="block"
+}else{
+document.getElementById("accessToken").style.display="none"};
+}
+
+function gpf(){
+if(document.getElementById("gpf").style.display=="none"){
+    document.getElementById("gpf").style.display="block"
+}else{
+document.getElementById("gpf").style.display="none"};
+}
+accessC();
+gpf();
+
+
+</script>
